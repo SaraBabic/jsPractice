@@ -1,0 +1,44 @@
+class 1
+
+promenljiva - kontejner koji sadrzi neku vrednost
+let
+$ i _ prvi karakter
+
+deklarizacija i 
+
+undefined
+
+implicitno - kad se ne podrazumeva 
+eksplicitno - deklarisala promenljivu
+
+
+const kad ne zelim da promenim 
+samo ako su primitivne vrednost onda je konstanta
+number, string, boolean, null, undefined
+
+objekat nije primitivan
+
+const person = { height: 170 };
+person.height = 4;
+
+query selector
+
+
+class 2 
+
+Data Types 
+Number
+1, 0 ,  -3, 4.423
+
+
+String
+'a', "a", `a`
+
+console.log(`$(name)'s ima $(age) godina);
+
+
+\'   - back slash escape caracter
+
+0 evaluira u false kao i prazan string
+
+dz: dodaj novi input u koji ces moci da ukucas jedan od brojeva koji su u listi, kada kliknes na njegov button obojice taj element pod tim brojem u listi.
