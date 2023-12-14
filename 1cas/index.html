@@ -7,27 +7,67 @@
     <title>Prvi cas</title>
 </head>
 <body>
-    <input/>
-    <button>Add</button>
+    <input id="inputField"/>
+    <button id="addButton">Add</button>
     <div id="nameList"></div>
+    <br>
+    <br>
+    <input id="numberInput" type="number"/>
+    <button id="paintButton">paint</button>
+    <div id="message"></div>
     
 
     <script>
         
+        function clearInput(input) {
+            input.value = '';
+        }
 
-        let button = document.getElementsByTagName('button').item(0);
 
-        button.addEventListener('click', function(){
-            let myInput = document.getElementsByTagName('input').item(0);
-            let inputValue = myInput.value;
-            if(inputValue != "") {
-                let myList = document.getElementById('nameList');
-                let listItem = document.createElement('P');
-                listItem.innerText = inputValue;
+        function clearInnerHTML(input) {
+            input.innerHTML = '';
+        }
 
-                myList.appendChild(listItem);
-                myInput.value = '';
+        let counter = 0;
+        let list = new Array();
+
+        document.querySelector('#addButton').addEventListener('click', function(){
+            let myInput = document.querySelector('#inputField');
+
+            if(myInput.value != "") {
+                let myList = document.querySelector('#nameList');
+                counter++;
+                myList.insertAdjacentHTML('beforeEnd', `<p id="${myInput.value}${counter}">${counter}. ${myInput.value}</p>`);
+                //template literal
+
+                list[counter] = myInput.value;
+
+                clearInput(myInput);
             }
+        });
+
+        document.querySelector('#paintButton').addEventListener('click', function() {
+            let myNumber = document.querySelector('#numberInput');
+            let messageBox = document.querySelector('#message');
+
+            list.forEach((name, index) => {
+                
+                if(index == myNumber.value) {
+                    document.querySelector(`#${name}${index}`).style.color = 'red';
+
+
+                    clearInnerHTML(messageBox);
+                    messageBox.insertAdjacentHTML('beforeEnd', '<p>We painted that name red.</p>')
+
+                    
+                }
+                else {
+                    clearInnerHTML(messageBox);
+                    messageBox.insertAdjacentHTML('beforeEnd', "<p>Sorry that number doesn't exists. :(</p>");
+                    
+                }
+            });
+            clearInput(myNumber);
         });
 
 
