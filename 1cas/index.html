@@ -7,14 +7,11 @@
     <title>Prvi cas</title>
 </head>
 <body>
-<<<<<<< HEAD
     <input id="inputField"/>
     <button id="addButton">Add</button>
-=======
+
     <p>Grade: <span>&#x1F41D;</span></p>
-    <input/>
-    <button>Add</button>
->>>>>>> 4bc381fdea85376513cd9bad9613eab862cf24b2
+    
     <div id="nameList"></div>
     <br>
     <br>
@@ -31,7 +28,7 @@
 
 
         function clearInnerHTML(input) {
-            input.innerHTML = '';
+            input.innerHTML = "";
         }
 
         let counter = 0;
@@ -60,7 +57,6 @@
                 
                 if(index == myNumber.value) {
                     document.querySelector(`#${name}${index}`).style.color = 'red';
-
 
                     clearInnerHTML(messageBox);
                     messageBox.insertAdjacentHTML('beforeEnd', '<p>We painted that name red.</p>')
