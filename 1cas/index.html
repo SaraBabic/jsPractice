@@ -35,25 +35,30 @@
 
         let listIndex = 0;
         let list = [];
-            console.log(list)
+            // console.log(list)
         document.querySelector('#addButton').addEventListener('click', function(){
             let myInput = document.querySelector('#inputField');
 
             if(myInput.value !== "") {
                 let myList = document.querySelector('#nameList');
                 
-                myList.insertAdjacentHTML('beforeEnd', `<p id="text-${myInput.value}${listIndex+1}">${listIndex+1}. ${myInput.value}</p>`);
+                myList.insertAdjacentHTML('beforeEnd', `<div id="div-${listIndex+1}" style="display:flex; align-items:center; gap: 15px"><p id="text-${listIndex+1}">${listIndex+1}. ${myInput.value}</p><img id="${listIndex+1}" class="editButton" src="./img/edit.png" alt="edit-img" style="height: 20px; cursor: pointer;"><div>`);
                 //template literal
 
                 list[listIndex] = myInput.value;
                 listIndex++;
                 clearInput(myInput);
+                let clickedButton = document.querySelector('.editButton')
+                clickedButton.addEventListener('click', function() {
+                    let myDiv = document.querySelector(`#div-${clickedButton.id}`);
+                    myDiv.insertAdjacentHTML('beforeEnd', `<input id="editInput"/><button id="edit">Edit</button>`)
+                });
             }
         });
 
         document.querySelector('#paintButton').addEventListener('click', function() {
             let myNumber = Number(document.querySelector('#numberInput').value);
-            console.log(myNumber)
+            // console.log(myNumber)
             let messageBox = document.querySelector('#message');
             let numberFound = false;
 
@@ -61,7 +66,7 @@
                 if(index == myNumber-1) {
                 
                     numberFound = true;
-                    document.querySelector(`#text-${name}${index+1}`).style.color = 'red';
+                    document.querySelector(`#text-${index+1}`).style.color = 'red';
                 
                     clearInput(document.querySelector('#numberInput'));
                 }
@@ -76,6 +81,9 @@
             }
             clearInput(myNumber);
         });
+
+
+       
 
 
     </script>

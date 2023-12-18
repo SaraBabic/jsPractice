@@ -22,6 +22,7 @@ function test(broj, funkcija) {
 function stampajBroj(broj) {
     console.log(broj);
 }
+//FUNKCIJA VRACA UNDEFINED!!!
 
 test(2,stampajBroj);
 
