@@ -41,20 +41,79 @@
 
             if(myInput.value !== "") {
                 let myList = document.querySelector('#nameList');
+
                 
-                myList.insertAdjacentHTML('beforeEnd', `<div id="div-${listIndex+1}" style="display:flex; align-items:center; gap: 15px"><p id="text-${listIndex+1}">${listIndex+1}. ${myInput.value}</p><img id="${listIndex+1}" class="editButton" src="./img/edit.png" alt="edit-img" style="height: 20px; cursor: pointer;"><div>`);
+
+                //div
+                const listDiv = document.createElement("div");
+                listDiv.id = `div-${listIndex+1}`;
+                listDiv.style.display = 'flex';
+                listDiv.style.alignItems = 'center';
+                listDiv.style.gap = '15px';
+
+                //p
+                const listNumber = document.createTextNode(`${listIndex+1}.`);
+
+                const listText = document.createElement('p');
+                listText.innerText = `${myInput.value}`;
+                listText.id = `text-${listIndex+1}`;
+
+
+                //edit img
+                const listOpenEdit = document.createElement('img');
+                listOpenEdit.id = `${listIndex+1}`;
+                listOpenEdit.classList.add('editButton');
+                listOpenEdit.src = './img/edit.png';
+                listOpenEdit.alt = "edit-img";
+                listOpenEdit.style.height = '20px'
+                listOpenEdit.style.cursor = 'pointer';
+
+       
+                listDiv.appendChild(listNumber);
+                listDiv.appendChild(listText);
+                listDiv.appendChild(listOpenEdit);
+                myList.appendChild(listDiv);
+
+            
+                listOpenEdit.addEventListener('click', function() {
+
+                    const editInput = document.createElement('input');
+                    editInput.id = `editInput${listIndex}`;
+
+                    const editButton = document.createElement('button');
+                    editButton.id = `iditIt${listIndex}`;
+                    editButton.innerHTML = 'Edit'
+
+                    editInput.innerText.value
+                    listDiv.appendChild(editInput);
+                    listDiv.appendChild(editButton);
+                    listOpenEdit.remove();
+                    
+
+                    // listDiv.insertAdjacentHTML('beforeEnd', `<input id="editInput"/><button id="edit">Edit</button>`)
+               
+                    editButton.addEventListener('click', function() {
+                        listText.innerText = `${editInput.value}`;
+                        editInput.remove();
+                        editButton.remove();
+                        listDiv.appendChild(listOpenEdit);
+                    });
+                });
+
+
+                // myList.insertAdjacentHTML('beforeEnd', `<div id="div-${listIndex+1}" style="display:flex; align-items:center; gap: 15px"><p id="text-${listIndex+1}">${listIndex+1}. ${myInput.value}</p><img id="${listIndex+1}" class="editButton" src="./img/edit.png" alt="edit-img" style="height: 20px; cursor: pointer;"><div>`);
                 //template literal
 
                 list[listIndex] = myInput.value;
                 listIndex++;
                 clearInput(myInput);
-                let clickedButton = document.querySelector('.editButton')
-                clickedButton.addEventListener('click', function() {
-                    let myDiv = document.querySelector(`#div-${clickedButton.id}`);
-                    myDiv.insertAdjacentHTML('beforeEnd', `<input id="editInput"/><button id="edit">Edit</button>`)
-                });
+
+                
+            
             }
         });
+
+                
 
         document.querySelector('#paintButton').addEventListener('click', function() {
             let myNumber = Number(document.querySelector('#numberInput').value);
@@ -66,6 +125,7 @@
                 if(index == myNumber-1) {
                 
                     numberFound = true;
+                    
                     document.querySelector(`#text-${index+1}`).style.color = 'red';
                 
                     clearInput(document.querySelector('#numberInput'));
