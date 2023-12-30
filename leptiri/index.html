@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEPTIRI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="buttons">
+            <div id="showCardsButton" class="button">
+                <img src="./slike/grid.png" alt="button for cards">
+            </div>
+            <div id="showListButton" class="button">
+                <img src="./slike/list.png" alt="button for list">
+            </div>
+        </div>
+        
+        <div id="cards"></div>
+        <div id="list"></div>
+    </div>
+    
+
+    <script>
+        let leptiri = [
+            {
+                latinskoIme: "Parnassius apollo",
+                srpskoIme: "Apolon",
+                putanjaDoSlike: "./slike/apollo.JPG"
+            },
+            {
+                latinskoIme: "Aporia crataegi",
+                srpskoIme: "Glogovac",
+                putanjaDoSlike: "./slike/Aporia-crataegi.jpg"
+            },
+            {
+                latinskoIme: "Plebeius argyrognomon",
+                srpskoIme: "Blistavi plavac",
+                putanjaDoSlike: "./slike/Plebeius_argyrognomon.jpg"
+            },
+            {
+                latinskoIme: "Euphydryas maturna",
+                srpskoIme: "Žuti šarenac",
+                putanjaDoSlike: "./slike/Euphydryas_maturna.jpg"
+            },
+            {
+                latinskoIme: "Arethusana arethusa",
+                srpskoIme: "Jesenji livadar",
+                putanjaDoSlike: "./slike/arethusana-arethusa.jpg"
+            },
+            {
+                latinskoIme: "Pararge aegeria",
+                srpskoIme: "Šumski pegavac",
+                putanjaDoSlike: "./slike/pararge-aegeria.jpg"
+            }
+        ];
+
+        let cardsDiv = document.querySelector('#cards');
+
+        leptiri.forEach((object, index) => {
+        const cardDiv = document.createElement('div');
+        cardDiv.id = `card-${index}`;
+
+        const cardImg = document.createElement('img');
+        cardImg.src = object.putanjaDoSlike;
+
+        const cardTitle = document.createElement('h1');
+        cardTitle.innerText = object.srpskoIme;
+
+        const cardLatinTitle = document.createElement('p');
+        cardLatinTitle.innerText = object.latinskoIme;
+
+        cardsDiv.appendChild(cardDiv);
+        cardDiv.appendChild(cardImg);
+        cardDiv.appendChild(cardTitle);
+        cardDiv.appendChild(cardLatinTitle);
+        });
+
+        document.querySelector('#showCardsButton').addEventListener('click', function() {
+            if (document.getElementById("list")) {
+                document.getElementById("list").setAttribute("id", "cards");
+            }
+        });
+
+        document.querySelector('#showListButton').addEventListener('click', function() {
+            if (document.getElementById("cards")) {
+                document.getElementById("cards").setAttribute("id", "list");
+            }
+        });
+    </script>
+</body>
+</html>

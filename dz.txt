@@ -1,4 +1,6 @@
 1. pored svakog list itema imam dugme za editovanje, kad kliknem na njega pojavice se novo input polje gde mogu da editujem njegov sadrzaj i kliknem save, nestane to polje i azurira se lista!!!
 
 
-2. niz objekata napravim, iiii svaki objekat ima tri prop srpsko ime, latinsko ime i slika i kroz petlju sve ispljunem u vidu kartica i uzmi pet leptira na primer i prikazi.
+2. niz objekata napravim, iiii svaki objekat ima tri prop srpsko ime, 
+latinsko ime i slika i kroz petlju sve ispljunem u vidu kartica 
+i uzmi pet leptira na primer i prikazi.
