@@ -22,7 +22,7 @@ body {
     width: 34px ;
 }
 
-#cards {
+#content {
     display: flex;
     flex-wrap: wrap;
     gap: 60px;
@@ -30,22 +30,22 @@ body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-#cards div {
+#content div {
     width: 250px;
 }
 
-#cards div:hover h1 {
+#content div:hover h1 {
     text-decoration: underline;
 }
 
-#cards img {
+#content img {
     border-radius: 8px 8px 0 0;
     object-fit: cover;
     width: 250px;
     height: 150px;
 }
 
-#cards p {
+#content p {
     font-style: italic;
 }
 

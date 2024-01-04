@@ -17,77 +17,138 @@
                 <img src="./slike/list.png" alt="button for list">
             </div>
         </div>
+        <div id="colorFilters"></div>
         
-        <div id="cards"></div>
-        <div id="list"></div>
+        <div id="content"></div>
     </div>
     
 
     <script>
+
+        //dodati nov atribut:boja krila, i filtrirati po bojama
+        //napraviti 4 kockice koje ce biti razlicito obojene
+        //to ce biti filteri za leptire
+        
+
         let leptiri = [
             {
                 latinskoIme: "Parnassius apollo",
                 srpskoIme: "Apolon",
+                bojaKrila: "bela",
                 putanjaDoSlike: "./slike/apollo.JPG"
             },
             {
                 latinskoIme: "Aporia crataegi",
                 srpskoIme: "Glogovac",
+                bojaKrila: "bela",
                 putanjaDoSlike: "./slike/Aporia-crataegi.jpg"
             },
             {
                 latinskoIme: "Plebeius argyrognomon",
                 srpskoIme: "Blistavi plavac",
+                bojaKrila: "plava",
                 putanjaDoSlike: "./slike/Plebeius_argyrognomon.jpg"
             },
             {
                 latinskoIme: "Euphydryas maturna",
                 srpskoIme: "Žuti šarenac",
+                bojaKrila: "žuta",
                 putanjaDoSlike: "./slike/Euphydryas_maturna.jpg"
             },
             {
                 latinskoIme: "Arethusana arethusa",
                 srpskoIme: "Jesenji livadar",
+                bojaKrila: "braon",
                 putanjaDoSlike: "./slike/arethusana-arethusa.jpg"
             },
             {
                 latinskoIme: "Pararge aegeria",
                 srpskoIme: "Šumski pegavac",
+                bojaKrila: "žuta",
                 putanjaDoSlike: "./slike/pararge-aegeria.jpg"
             }
         ];
 
-        let cardsDiv = document.querySelector('#cards');
+        const colorMapper = {
+            žuta: "#ffff00",
+            bela: "#ffffff",
+            plava: "#0000ff",
+            braon: "#964B00"
+        };
 
-        leptiri.forEach((object, index) => {
-        const cardDiv = document.createElement('div');
-        cardDiv.id = `card-${index}`;
+        const contentDiv = document.getElementById('content');
+        const colorFilterDiv = document.getElementById('colorFilters');
 
-        const cardImg = document.createElement('img');
-        cardImg.src = object.putanjaDoSlike;
+        function listExistingColors(leptiri) {
+            let colors = [];
+                leptiri.forEach(function(leptir) {
 
-        const cardTitle = document.createElement('h1');
-        cardTitle.innerText = object.srpskoIme;
+                if(!colors.includes(leptir.bojaKrila)) {
+                    colors.push(leptir.bojaKrila);
+                } 
+                });
+            
+            
+            colors.forEach(function(color) {
+                colorFilterDiv.insertAdjacentHTML('beforeEnd',
+                `<div 
+                    id="${color}" 
+                    style="background-color: ${colorMapper[color]}" 
+                    onclick="selectColor(this)"
+                >${color}</div>`
+            );
+            });
+            
+        }
+        listExistingColors(leptiri);
 
-        const cardLatinTitle = document.createElement('p');
-        cardLatinTitle.innerText = object.latinskoIme;
+        function selectColor(target) {
+            console.log(target.id);
+        };
 
-        cardsDiv.appendChild(cardDiv);
-        cardDiv.appendChild(cardImg);
-        cardDiv.appendChild(cardTitle);
-        cardDiv.appendChild(cardLatinTitle);
-        });
+        function showGrid(leptiri, selectedColor = []) {
+            if(selectColor !== 0) {
+
+            }
+            leptiri.forEach((leptir, index) => {
+                contentDiv.insertAdjacentHTML('beforeEnd', 
+            `<div id="card-${index}">
+                <img src=${leptir.putanjaDoSlike} alt=${leptir.srpskoIme}>
+                <h1>${leptir.srpskoIme}</h1>
+                <p>${leptir.latinskoIme}</p>
+                <p>Boja krila: ${leptir.bojaKrila}</p>
+            </div>`
+            );
+            });
+        }
+
+        function showList(leptiri) {
+            const table = document.createElement('table');
+            table.id = 'list';
+            contentDiv.appendChild(table);
+            leptiri.forEach((leptir, index) => {
+                table.insertAdjacentHTML('beforeEnd', 
+            `<tr id="list-item-${index}">
+                <td><img src=${leptir.putanjaDoSlike} alt=${leptir.srpskoIme}></td>
+                <td><h1>${leptir.srpskoIme}</h1></td>
+                <td><p>${leptir.latinskoIme}</p></td>
+                <td><p>Boja krila: ${leptir.bojaKrila}</p></td>
+            </tr>`
+            );
+            });
+        }
+
+        showGrid(leptiri);
 
         document.querySelector('#showCardsButton').addEventListener('click', function() {
-            if (document.getElementById("list")) {
-                document.getElementById("list").setAttribute("id", "cards");
-            }
+                contentDiv.innerHTML = "";
+                showGrid(leptiri);
         });
 
         document.querySelector('#showListButton').addEventListener('click', function() {
-            if (document.getElementById("cards")) {
-                document.getElementById("cards").setAttribute("id", "list");
-            }
+            
+            contentDiv.innerHTML = "";
+            showList(leptiri);
         });
     </script>
 </body>
