@@ -10,6 +10,9 @@
 <body>
     <div class="container">
         <div class="buttons">
+            <div id="showAll" class="button">
+                <img src="./slike/big-wing-butterfly.png" alt="butterfly">
+            </div>
             <div id="showCardsButton" class="button">
                 <img src="./slike/grid.png" alt="button for cards">
             </div>
@@ -24,11 +27,6 @@
     
 
     <script>
-
-        //dodati nov atribut:boja krila, i filtrirati po bojama
-        //napraviti 4 kockice koje ce biti razlicito obojene
-        //to ce biti filteri za leptire
-        
 
         let leptiri = [
             {
@@ -70,10 +68,10 @@
         ];
 
         const colorMapper = {
-            žuta: "#ffff00",
+            žuta: "#d9b650",
             bela: "#ffffff",
-            plava: "#0000ff",
-            braon: "#964B00"
+            plava: "#0092ca",
+            braon: "#402a23"
         };
 
         const contentDiv = document.getElementById('content');
@@ -102,11 +100,19 @@
         }
         listExistingColors(leptiri);
 
+        let currentList = leptiri;
+
         function selectColor(target) {
-            console.log(target.id);
+            filtriraniLeptiri = leptiri.filter(function(leptir) {
+                
+                return leptir.bojaKrila == target.id;
+            });
+
+            currentList = filtriraniLeptiri;
+            showGrid(filtriraniLeptiri);
         };
 
-        function showGrid(leptiri, selectedColor = []) {
+        function createGrid(leptiri, selectedColor = []) {
             if(selectColor !== 0) {
 
             }
@@ -122,10 +128,12 @@
             });
         }
 
-        function showList(leptiri) {
+        function createList(leptiri) {
             const table = document.createElement('table');
             table.id = 'list';
             contentDiv.appendChild(table);
+
+
             leptiri.forEach((leptir, index) => {
                 table.insertAdjacentHTML('beforeEnd', 
             `<tr id="list-item-${index}">
@@ -138,17 +146,27 @@
             });
         }
 
-        showGrid(leptiri);
+        createGrid(leptiri);
+
+        function showGrid(listaLeptira) {
+            contentDiv.innerHTML = "";
+            createGrid(listaLeptira);
+        }
+        function showList(listaLeptira) {
+            contentDiv.innerHTML = "";
+            createList(listaLeptira);
+        }
+
+        document.querySelector('#showAll').addEventListener('click', function() {
+            showGrid(leptiri);
+        });
 
         document.querySelector('#showCardsButton').addEventListener('click', function() {
-                contentDiv.innerHTML = "";
-                showGrid(leptiri);
+                showGrid(currentList);
         });
 
         document.querySelector('#showListButton').addEventListener('click', function() {
-            
-            contentDiv.innerHTML = "";
-            showList(leptiri);
+            showList(currentList);
         });
     </script>
 </body>

@@ -72,3 +72,14 @@ body {
 #list h1 {
     font-size: 24px;
 }
+#colorFilters {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 50px 0;
+}
+#colorFilters div {
+    padding: 15px;
+    border: black solid 1px;
+    border-radius: 8px;
+}
