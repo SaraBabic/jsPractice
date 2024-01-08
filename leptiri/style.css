@@ -83,3 +83,9 @@ body {
     border: black solid 1px;
     border-radius: 8px;
 }
+#sort {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 50px;
+}

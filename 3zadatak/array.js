@@ -54,4 +54,6 @@ let sarineFiltriraneCipele = sarineCipele.filter(function(item, index, arr) {
 
 // console.log(sarineFiltriraneCipele);
 
+
+//includess
 console.log([1,2].includes(2));

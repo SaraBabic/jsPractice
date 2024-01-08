@@ -28,6 +28,9 @@
 
     <script>
 
+        // ako selektujem boju, taj filter nek ostane aktiva, 
+        // pa mozemo da izaberemo vise boja, i jedno dugme za reset filter
+
         let leptiri = [
             {
                 latinskoIme: "Parnassius apollo",
@@ -64,7 +67,25 @@
                 srpskoIme: "Šumski pegavac",
                 bojaKrila: "žuta",
                 putanjaDoSlike: "./slike/pararge-aegeria.jpg"
-            }
+            },
+            {
+                latinskoIme: "Thymelicus lineola",
+                srpskoIme: "Smeđi skelar",
+                bojaKrila: "braon",
+                putanjaDoSlike: "./slike/Thymelicus-lineola.jpeg"
+            },
+            {
+                latinskoIme: "Nymphalis xanthomelas",
+                srpskoIme: "Žutonogi mnogobojac",
+                bojaKrila: "žuta",
+                putanjaDoSlike: "./slike/Nymphalis-xanthomelas.jpg"
+            },
+            {
+                latinskoIme: "Cupido decolorata ",
+                srpskoIme: "Bledi plavac",
+                bojaKrila: "plava",
+                putanjaDoSlike: "./slike/Cupido-decolorata.jpg"
+            },
         ];
 
         const colorMapper = {
@@ -159,6 +180,7 @@
 
         document.querySelector('#showAll').addEventListener('click', function() {
             showGrid(leptiri);
+            currentList = leptiri;
         });
 
         document.querySelector('#showCardsButton').addEventListener('click', function() {
