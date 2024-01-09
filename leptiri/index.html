@@ -123,6 +123,7 @@
 
         let currentList = leptiri;
         let selectedColors = [];
+        let selectedView = 'grid';
 
         function selectColor(target) {
 
@@ -141,11 +142,6 @@
                 selectedColors.push(target.id);
             }
 
-            // selectedColors.forEach(function(color) {
-            //     filtriraniLeptiri = leptiri.filter(function(leptir) {
-            //         return leptir.bojaKrila == color;
-            //     });
-            // });
             filtriraniLeptiri = leptiri.filter(function(leptir) {
                 return selectedColors.includes(leptir.bojaKrila);
             });
@@ -153,7 +149,21 @@
             console.log(filtriraniLeptiri);
             console.log(selectedColors);
             currentList = filtriraniLeptiri;
-            showGrid(filtriraniLeptiri);
+            if(selectedColors.length >= 1) {
+                if(selectedView === 'grid') {
+                    showGrid(filtriraniLeptiri);
+                } else {
+                    showList(filtriraniLeptiri);
+                }
+            } else {
+                if(selectedView === 'grid') {
+                    showGrid(leptiri);
+                } else {
+                    showList(leptiri);
+                }
+            }
+            
+            
         };
 
         
@@ -192,7 +202,9 @@
             });
         }
 
-        createGrid(leptiri);
+        if(selectedView === 'grid') {
+            createGrid(leptiri);
+        }
 
         function showGrid(listaLeptira) {
             contentDiv.innerHTML = "";
@@ -203,17 +215,14 @@
             createList(listaLeptira);
         }
 
-        document.querySelector('#showAll').addEventListener('click', function() {
-            showGrid(leptiri);
-            currentList = leptiri;
-        });
-
         document.querySelector('#showCardsButton').addEventListener('click', function() {
                 showGrid(currentList);
+                selectedView = 'grid';
         });
 
         document.querySelector('#showListButton').addEventListener('click', function() {
             showList(currentList);
+            selectedView = 'list';
         });
     </script>
 </body>
