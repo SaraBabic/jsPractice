@@ -10,9 +10,6 @@
 <body>
     <div class="container">
         <div class="buttons">
-            <div id="showAll" class="button">
-                <img src="./slike/big-wing-butterfly.png" alt="butterfly">
-            </div>
             <div id="showCardsButton" class="button">
                 <img src="./slike/grid.png" alt="button for cards">
             </div>
@@ -20,7 +17,10 @@
                 <img src="./slike/list.png" alt="button for list">
             </div>
         </div>
-        <div id="colorFilters"></div>
+        <div id="colorFilters">
+            
+        </div>
+        
         
         <div id="content"></div>
     </div>
@@ -122,16 +122,41 @@
         listExistingColors(leptiri);
 
         let currentList = leptiri;
+        let selectedColors = [];
 
         function selectColor(target) {
+
+            if(!target.classList.contains('selected')) {
+                target.classList.add('selected');
+            }
+            else {
+                target.classList.remove('selected');
+            }
+
+            if(selectedColors.includes(target.id)) {
+                const idBoje = selectedColors.indexOf(target.id);
+                selectedColors.splice(idBoje, 1);     
+            }
+            else {
+                selectedColors.push(target.id);
+            }
+
+            // selectedColors.forEach(function(color) {
+            //     filtriraniLeptiri = leptiri.filter(function(leptir) {
+            //         return leptir.bojaKrila == color;
+            //     });
+            // });
             filtriraniLeptiri = leptiri.filter(function(leptir) {
-                
-                return leptir.bojaKrila == target.id;
+                return selectedColors.includes(leptir.bojaKrila);
             });
 
+            console.log(filtriraniLeptiri);
+            console.log(selectedColors);
             currentList = filtriraniLeptiri;
             showGrid(filtriraniLeptiri);
         };
+
+        
 
         function createGrid(leptiri, selectedColor = []) {
             if(selectColor !== 0) {

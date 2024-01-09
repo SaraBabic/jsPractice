@@ -22,6 +22,7 @@ body {
     width: 34px ;
 }
 
+
 #content {
     display: flex;
     flex-wrap: wrap;
@@ -80,7 +81,7 @@ body {
 }
 #colorFilters div {
     padding: 15px;
-    border: black solid 1px;
+    border: 1px solid black;
     border-radius: 8px;
 }
 #sort {
@@ -88,4 +89,7 @@ body {
     justify-content: center;
     gap: 20px;
     margin-bottom: 50px;
+}
+.selected {
+    border: 1px solid red !important;
 }
