@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Add Butterfly</title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        <label for="latinskoIme">Latinsko ime leptira: </label>
+        <input id="latinskoIme" type="text" required="required">
+
+        <!-- prevodi -->
+        <div id="translations">
+            
+        </div>
+        <div id="addTranslationButton">Add</div>
+
+        <div id="colorFilters"></div>
+
+        <label>Lokacija:</label>
+        <input placeholder="geografska sirina" type="text">
+        <input placeholder="geografska duzina" type="text">
+        <input placeholder="nadmorska visina" type="text">
+        <br><br>
+        <label for="date">Datum nalaza:</label>
+        <input type="date" id="date">
+        <br><br>
+        <label for="picture">Slike:</label>
+        <input type="file" id="picture">
+
+    </form>
+    <script>
+         const colorMapper = [
+            {
+                ime: "žuta",
+                boja: "#d9b650"
+            },
+            {
+                ime: "bela",
+                boja: "#ffffff"
+            },
+            {
+                ime: "plava",
+                boja: "#0092ca"
+            },
+            {
+                ime: "braon",
+                boja: "#402a23"
+            },
+            {
+                ime: "crvena",
+                boja: "#ff0000"
+            },
+            {
+                ime: "zelena",
+                boja: "#00ff00"
+            },
+         ];
+
+         let languages = [
+            "srpski",
+            "madjarski",
+            "engleski"
+         ];
+
+        // Colors.
+        let colorPalette = document.getElementById('colorFilters');
+        function listColors(colors) {
+            colors.forEach(function(color) {
+                colorPalette.insertAdjacentHTML('beforeEnd', 
+                `<div id="${color.ime}" style="background-color: ${color.boja}">${color.ime}</div>`
+                );
+            });
+        };
+        listColors(colorMapper);
+
+        // Translation.
+        let translationsDiv = document.getElementById('translations');
+        let translationButton = document.getElementById("addTranslationButton");
+
+        translationButton.addEventListener('click', function() {
+            const select = document.createElement('select');
+            select.name = 'languages';
+            select.id = 'languages';
+            translationsDiv.appendChild(select);
+
+            for(let i = 0; i < languages.length; i++) {
+                let color = languages[i];
+                let option = document.createElement('option');
+                option.value = languages[i];
+                option.textContent = languages[i];
+                select.appendChild(option);
+            }
+            const input = document.createElement('input');
+            input.type = "text";
+
+            languages.appendChild = input;
+
+            
+        });
+
+    </script>
+</body>
+</html>
