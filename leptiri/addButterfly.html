@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Add Butterfly</title>
 </head>
-<body>
+<body class="bodyForm">
     <form method="post" enctype="multipart/form-data">
         <label for="latinskoIme">Latinsko ime leptira: </label>
         <input id="latinskoIme" type="text" required="required">
@@ -15,20 +15,23 @@
         <div id="translations">
             
         </div>
-        <div id="addTranslationButton">Add</div>
+        <div id="addButton"></div>
+        
 
         <div id="colorFilters"></div>
 
         <label>Lokacija:</label>
-        <input placeholder="geografska sirina" type="text">
-        <input placeholder="geografska duzina" type="text">
-        <input placeholder="nadmorska visina" type="text">
+        <input id="geoWidth" placeholder="geografska sirina" type="text">
+        <input id="geoLength" placeholder="geografska duzina" type="text">
+        <input id="geoHeigth" placeholder="nadmorska visina" type="text">
         <br><br>
         <label for="date">Datum nalaza:</label>
         <input type="date" id="date">
         <br><br>
         <label for="picture">Slike:</label>
         <input type="file" id="picture">
+
+        <div id="addButterfly">Dodaj leptira</div>
 
     </form>
     <script>
@@ -51,11 +54,11 @@
             },
             {
                 ime: "crvena",
-                boja: "#ff0000"
+                boja: "#BF3131"
             },
             {
                 ime: "zelena",
-                boja: "#00ff00"
+                boja: "#597E52"
             },
          ];
 
@@ -70,21 +73,44 @@
         function listColors(colors) {
             colors.forEach(function(color) {
                 colorPalette.insertAdjacentHTML('beforeEnd', 
-                `<div id="${color.ime}" style="background-color: ${color.boja}">${color.ime}</div>`
+                `<div id="${color.ime}" class="color" style="background-color: ${color.boja}">${color.ime}</div>`
                 );
             });
         };
         listColors(colorMapper);
 
+        // Select Colors.
+        let colors = document.querySelectorAll(".color");
+        colors.forEach(function(color) {
+            color.addEventListener('click', function() {
+                if(!color.classList.contains('selected')) {
+                color.classList.add('selected');
+                }
+                else {
+                    color.classList.remove('selected');
+                }
+            });
+        });
+
+
         // Translation.
         let translationsDiv = document.getElementById('translations');
-        let translationButton = document.getElementById("addTranslationButton");
 
-        translationButton.addEventListener('click', function() {
+        const addTranslationButton = document.createElement('div');
+        addTranslationButton.id = "addTranslationButton";
+        addTranslationButton.textContent = "Dodaj prevod";
+
+        const addButtonWrapper = document.getElementById('addButton');
+
+        addButtonWrapper.appendChild(addTranslationButton);
+
+        let wrapperId = 0;
+        addTranslationButton.addEventListener('click', function() {
+            const wrapper = document.createElement('div');
+            wrapper.id = `${wrapperId}`;
+            wrapper.className = 'oneLanguage';
             const select = document.createElement('select');
             select.name = 'languages';
-            select.id = 'languages';
-            translationsDiv.appendChild(select);
 
             for(let i = 0; i < languages.length; i++) {
                 let color = languages[i];
@@ -96,10 +122,78 @@
             const input = document.createElement('input');
             input.type = "text";
 
-            languages.appendChild = input;
+            const deleteTranslation = document.createElement('div');
+            deleteTranslation.id = `delete-${wrapperId}`;
+            deleteTranslation.innerText = "delete";
+            deleteTranslation.className = "delete"
 
+            translationsDiv.appendChild(wrapper);
+            wrapper.appendChild(select);
+            wrapper.appendChild(input); 
+            wrapper.appendChild(deleteTranslation);
+
+
+            // Delete translation button if we added all possible languages.
+
+            if(translationsDiv.children.length >= languages.length) {
+                addTranslationButton.remove();
+            }
+            wrapperId++;
+            const deleteButtons = document.querySelectorAll('.delete');
+            deleteButtons.forEach(function(button) {
+                button.addEventListener("click", function() { 
+                    const buttonIdNumber = button.id.slice(7);
+                    if(buttonIdNumber == wrapper.id) {
+                        document.getElementById(wrapper.id).remove();
+                        if(translationsDiv.children.length >= languages.length) {
+                            addTranslationButton.remove();
+                        } else {
+                            addButtonWrapper.appendChild(addTranslationButton);
+                        }
+                    }
+                });
+            })
             
         });
+
+        // Add Butterfly.
+        const addButterfly = document.getElementById('addButterfly');
+        addButterfly.addEventListener('click', function() {
+            let latinskoIme = document.getElementById("latinskoIme").value;
+            let geografskaSirina = document.getElementById("geoWidth").value;
+            let geografskaDuzina = document.getElementById("geoLength").value;
+            let geografskaVisina = document.getElementById("geoHeigth").value;
+            let datum = document.getElementById("date").value;
+            let izabraneBoje = document.querySelectorAll(".selected");
+            let imenaBoja = [];
+            izabraneBoje.forEach(function(boja) {
+                imenaBoja.push(boja.id);
+            });
+
+            let prevodi = document.querySelectorAll(".oneLanguage");
+            let uneseniPrevodi = [];
+            prevodi.forEach(function(prevod) {
+                uneseniPrevodi[prevod.querySelector('select').value] = prevod.querySelector('input').value;
+            });
+
+            let newButterfly = {
+                name: latinskoIme,
+                translations: uneseniPrevodi,
+                colors: imenaBoja,
+                location: {
+                    width: geografskaSirina,
+                    length: geografskaDuzina,
+                    height: geografskaVisina
+                },
+                date: datum,
+                pictures: []
+            };
+            console.log(newButterfly);
+        });
+
+        
+
+        
 
     </script>
 </body>

@@ -75,6 +75,7 @@ body {
 }
 #colorFilters {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
     margin: 50px 0;
@@ -91,5 +92,51 @@ body {
     margin-bottom: 50px;
 }
 .selected {
-    border: 1px solid red !important;
+    box-shadow: 0 5px 15px black !important;
+}
+
+.bodyForm {
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+}
+
+input {
+    margin: 5px 0 10px 0;
+    height: 20px;
+    border-radius: 8px;
+    border: 1px solid black;
+}
+
+#addButterfly {
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: bisque;
+    text-align: center;
+}
+
+#addTranslationButton {
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 8px;
+    width: fit-content;
+    padding: 5px 25px;
+    background-color: rgba(201, 162, 238, 0.767);
+}
+
+.delete {
+    width: fit-content;
+    cursor: pointer;
+}
+
+.oneLanguage {
+    display: flex;
+    gap: 15px;
+    align-items: center;
 }

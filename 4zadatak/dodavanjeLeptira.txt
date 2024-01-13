@@ -8,3 +8,4 @@ treba mi jedna forma koja ce da ima
 - datum nalaza
 - input za dodavanje fajlova, jednog ili vise
 kada neko odabere sliku ona treba da bude prikazana i u svakom trenutku moze da se obrise iz te liste
+
