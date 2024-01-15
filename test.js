@@ -15,13 +15,13 @@
 // }
 
 
-function test(broj, funkcija) {
-    funkcija(broj);
-}
+// function test(broj, funkcija) {
+//     funkcija(broj);
+// }
 
-function stampajBroj(broj) {
-    console.log(broj);
-}
+// function stampajBroj(broj) {
+//     console.log(broj);
+// }
 //FUNKCIJA VRACA UNDEFINED!!!
 
 test(2,stampajBroj);
@@ -35,3 +35,9 @@ test(2,stampajBroj);
 
 // console.log(saberi(2,2));
 // console.log(saraMatematika.saberi(2,3));
+
+let newArray = [1, 2, 3, 4];
+
+newArray.forEach(function(broj) {
+    console.log(broj);
+});

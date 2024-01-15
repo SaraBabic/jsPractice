@@ -84,6 +84,7 @@ body {
     padding: 15px;
     border: 1px solid black;
     border-radius: 8px;
+    cursor: pointer;
 }
 #sort {
     display: flex;
@@ -133,6 +134,9 @@ input {
 .delete {
     width: fit-content;
     cursor: pointer;
+}
+.delete img {
+    width: 20px;
 }
 
 .oneLanguage {

@@ -31,6 +31,7 @@
         <label for="picture">Slike:</label>
         <input type="file" id="picture">
 
+        <div id="errorMessage"></div>
         <div id="addButterfly">Dodaj leptira</div>
 
     </form>
@@ -50,7 +51,7 @@
             },
             {
                 ime: "braon",
-                boja: "#402a23"
+                boja: "#77625c"
             },
             {
                 ime: "crvena",
@@ -120,12 +121,18 @@
                 select.appendChild(option);
             }
             const input = document.createElement('input');
+            input.required = "required";
             input.type = "text";
 
             const deleteTranslation = document.createElement('div');
             deleteTranslation.id = `delete-${wrapperId}`;
-            deleteTranslation.innerText = "delete";
             deleteTranslation.className = "delete"
+
+            const deleteIkonica = document.createElement('img');
+            deleteIkonica.src = './slike/remove.png';
+            deleteIkonica.alt = 'delete';
+
+            deleteTranslation.appendChild(deleteIkonica);
 
             translationsDiv.appendChild(wrapper);
             wrapper.appendChild(select);
