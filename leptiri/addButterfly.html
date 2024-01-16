@@ -7,7 +7,7 @@
     <title>Add Butterfly</title>
 </head>
 <body class="bodyForm">
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" action="/process.php">
         <label for="latinskoIme">Latinsko ime leptira: </label>
         <input id="latinskoIme" type="text" required="required">
 
@@ -32,7 +32,7 @@
         <input type="file" id="picture">
 
         <div id="errorMessage"></div>
-        <div id="addButterfly">Dodaj leptira</div>
+        <button id="addButterfly">Dodaj leptira</button>
 
     </form>
     <script>
@@ -163,9 +163,15 @@
             
         });
 
+        document.getElementById('picture').addEventListener('change', function(event) {
+            console.log(event.target.files);
+        });
+        
+
         // Add Butterfly.
         const addButterfly = document.getElementById('addButterfly');
-        addButterfly.addEventListener('click', function() {
+        addButterfly.addEventListener('click', function(event) {
+            event.preventDefault();
             let latinskoIme = document.getElementById("latinskoIme").value;
             let geografskaSirina = document.getElementById("geoWidth").value;
             let geografskaDuzina = document.getElementById("geoLength").value;
@@ -178,11 +184,17 @@
             });
 
             let prevodi = document.querySelectorAll(".oneLanguage");
+
             let uneseniPrevodi = [];
             prevodi.forEach(function(prevod) {
-                uneseniPrevodi[prevod.querySelector('select').value] = prevod.querySelector('input').value;
+                uneseniPrevodi.push({
+                    language: prevod.querySelector('select').value,
+                    translation: prevod.querySelector('input').value
+                });
             });
 
+            // Nije dobro , ne sme da bude empty string!!!! trudimo se :)
+            // Ako saljem JSON onda mogu da posaljem NULL, a ako saljem drugi content type onda nmg da saljem NULL
             let newButterfly = {
                 name: latinskoIme,
                 translations: uneseniPrevodi,
