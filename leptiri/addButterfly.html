@@ -184,30 +184,52 @@
             });
 
             let prevodi = document.querySelectorAll(".oneLanguage");
-
+            
             let uneseniPrevodi = [];
+            let listaJezika = [];
             prevodi.forEach(function(prevod) {
                 uneseniPrevodi.push({
                     language: prevod.querySelector('select').value,
                     translation: prevod.querySelector('input').value
                 });
+                listaJezika.push(prevod.querySelector('select').value);
             });
+            function findDuplicates(arr) {
+                return new Set(arr).size !== arr.length
+            }
+
+            if(findDuplicates(listaJezika)) {
+                document.getElementById('errorMessage').insertAdjacentHTML('beforeEnd', `<p style='color: red;' id='languageError'>You can't add one language twice.</p>`);
+            }
+            if(!findDuplicates(listaJezika)) {
+                document.getElementById('languageError').remove();
+            }
 
             // Nije dobro , ne sme da bude empty string!!!! trudimo se :)
             // Ako saljem JSON onda mogu da posaljem NULL, a ako saljem drugi content type onda nmg da saljem NULL
             let newButterfly = {
                 name: latinskoIme,
-                translations: uneseniPrevodi,
-                colors: imenaBoja,
-                location: {
+                pictures: []
+            };
+
+            if(uneseniPrevodi.length > 0) {
+                newButterfly.translations = uneseniPrevodi;
+            }
+            if(imenaBoja.length > 0) {
+                newButterfly.colors = imenaBoja;
+            }
+            if(geografskaSirina || geografskaDuzina || geografskaVisina) {
+                newButterfly.location = {
                     width: geografskaSirina,
                     length: geografskaDuzina,
                     height: geografskaVisina
-                },
-                date: datum,
-                pictures: []
-            };
-            console.log(newButterfly);
+                };
+            }
+            if (datum) {
+                newButterfly.date = datum;
+            }
+
+            // console.log(newButterfly);
         });
 
         
