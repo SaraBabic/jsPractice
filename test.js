@@ -41,3 +41,5 @@ let newArray = [1, 2, 3, 4];
 newArray.forEach(function(broj) {
     console.log(broj);
 });
+
+// test
